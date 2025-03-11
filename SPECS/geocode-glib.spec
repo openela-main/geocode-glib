@@ -2,12 +2,14 @@
 
 Name:           geocode-glib
 Version:        3.26.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Geocoding helper library
 
 License:        LGPLv2+
 URL:            http://www.gnome.org/
 Source0:        http://download.gnome.org/sources/%{name}/3.26/%{name}-%{version}.tar.xz
+
+Patch:          0001-fix-nominatim-crasher.patch
 
 BuildRequires:  gettext
 BuildRequires:  gtk-doc
@@ -37,7 +39,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q
+%autosetup -p1 -S gendiff
 
 
 %build
@@ -68,6 +70,9 @@ developing applications that use %{name}.
 
 
 %changelog
+* Mon Feb 03 2025 Milan Crha <mcrha@redhat.com> - 3.26.0-4
+- Resolves: RHEL-4090 (Fix Nominatim crasher)
+
 * Mon Feb 01 2021 Kalev Lember <klember@redhat.com> - 3.26.0-3
 - Rebuild against fixed gtk-doc to fix another multilib conflict (#1853142)
 
